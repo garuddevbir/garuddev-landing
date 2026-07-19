@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ══════════════════════════════════════════════════════════════════
+     EDIT #1 — TAB TITLE & SHARE PREVIEW
+     og:image is the thumbnail shown when the link is shared. Once the
+     site is live, set it to the full URL of an image (e.g. the poster).
+══════════════════════════════════════════════════════════════════ -->
+<title>Garuddev.bir — Cinematic Drone Films in Bir</title>
+<meta name="description" content="Cinematic 4K drone memories of your journey in Bir. Families, couples, bikers & trekkers." />
+<meta property="og:title" content="Garuddev.bir" />
+<meta property="og:description" content="Cinematic drone memories of your journey in Bir." />
+<!-- <meta property="og:image" content="https://your-site.com/hero.jpg" /> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Sacramento&display=swap" rel="stylesheet" />
+
+<style>
+  /* ════════════════════════════════════════════════════════════════
+     EDIT #2 — COLORS  (already set to your brief)
+  ════════════════════════════════════════════════════════════════ */
+  :root {
+    --bg:        #f0e6dd;  /* page background — beige from the poster   */
+    --cta:       #a58158;  /* CTA / link button fill — warm tan         */
+    --cta-text:  #fbf6ef;  /* text on the tan buttons (readable cream)  */
+    --grad-a:    #5a4632;  /* CTA border gradient — start (soft dark brown) */
+    --grad-b:    #ffca43;  /* CTA border gradient — end (gold)          */
+
+    --ink:       #2a2016;  /* headings / dark text on beige             */
+    --muted:     #7c6a56;  /* secondary text                           */
+    --gold:      #a5813f;  /* small accents & dividers                  */
+
+    --maxw: 520px;
+    --hero-h: 400px;   /* height of the fading hero image  */
+    --pad-top: 120px;   /* logo overlaps the peaks, wordmark lands on beige */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+    min-height: 100dvh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Hero image fading into the beige ---------- */
+  /* EDIT #3 — to swap the hero photo, replace hero.jpg (keep the name) */
+  .hero-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: var(--hero-h);
+    z-index: 0;
+    background:
+      linear-gradient(to bottom,
+        rgba(240,230,221,0.00) 0%,
+        rgba(240,230,221,0.05) 20%,
+        rgba(165,129,88,0.26) 40%,
+        rgba(240,230,221,0.90) 56%,
+        var(--bg) 63%),
+      url('hero.jpg') center 30% / cover no-repeat;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: var(--pad-top) 22px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* ---------- Brand header (logo lockup) ---------- */
+  .logo {
+    width: min(300px, 82%);
+    height: auto;
+    margin-bottom: -32px;
+    filter: drop-shadow(0 6px 18px rgba(42,32,22,0.22));
+  }
+
+  .name {
+    font-family: "Oswald", sans-serif;
+    font-weight: 700;
+    font-size: 2.15rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-shadow: 0 1px 10px rgba(240,230,221,0.7);
+  }
+
+  .script {
+    font-family: "Sacramento", cursive;
+    font-size: 1.9rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-top: 2px;
+    text-shadow: 0 1px 3px rgba(240,230,221,0.95), 0 0 12px rgba(240,230,221,0.9);
+  }
+
+  .tagline {
+    font-family: "Oswald", sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 12px;
+    text-shadow: 0 1px 3px rgba(240,230,221,0.95), 0 0 10px rgba(240,230,221,0.9);
+  }
+
+  /* small pricing chip echoing the poster */
+  .chip {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 7px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink);
+    background: rgba(255,255,255,0.45);
+    border: 1px solid rgba(165,129,88,0.4);
+    border-radius: 999px;
+    backdrop-filter: blur(2px);
+  }
+  .chip b { color: var(--gold); }
+
+  /* ---------- Social icon row ---------- */
+  .socials { display: flex; gap: 20px; justify-content: center; margin: 22px 0 34px; }
+  .socials a {
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--ink);
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(165,129,88,0.35);
+    border-radius: 50%;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .socials a:hover { transform: translateY(-2px); background: rgba(255,255,255,0.85); }
+  .socials svg { width: 22px; height: 22px; }
+
+  /* ---------- Service buttons (icon + title) ---------- */
+  /* Fill = --cta, with a thin brown→gold gradient border */
+  .links { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+    text-decoration: none;
+    font-family: "Oswald", sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 1rem;
+    line-height: 1.15;
+    color: var(--cta-text);
+    padding: 16px 18px;
+    border-radius: 14px;
+    border: 3px solid transparent;
+    background:
+      linear-gradient(var(--cta), var(--cta)) padding-box,
+      linear-gradient(135deg, var(--grad-a), var(--grad-b)) border-box;
+    box-shadow: 0 3px 10px rgba(42,32,22,0.15);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(42,32,22,0.28);
+  }
+  .link .ic {
+    flex: 0 0 auto;
+    width: 26px; height: 26px;
+    color: var(--cta-text);
+  }
+  .link .ic svg { width: 100%; height: 100%; }
+  .link span { flex: 1 1 auto; }
+  .link .arrow { flex: 0 0 auto; opacity: 0.6; width: 16px; height: 16px; }
+
+  /* ---------- Section blocks ---------- */
+  .section { width: 100%; margin-top: 42px; }
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px; margin-bottom: 14px;
+    color: var(--gold);
+  }
+  .divider::before, .divider::after {
+    content: ""; height: 1px; width: 46px;
+    background: linear-gradient(to right, transparent, var(--gold));
+  }
+  .divider::after { background: linear-gradient(to left, transparent, var(--gold)); }
+  .divider span {
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .section p { color: var(--ink); font-size: 0.98rem; max-width: 44ch; margin: 0 auto; }
+
+  .contact-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .contact-list a { color: var(--ink); text-decoration: none; font-weight: 500; }
+  .contact-list a:hover { color: var(--gold); text-decoration: underline; }
+
+  footer { margin-top: 48px; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  /* ---------- Tablets & large phones ---------- */
+  @media (max-width: 600px) {
+    :root { --hero-h: 350px; --pad-top: 52px; }
+    .page { padding-left: 18px; padding-right: 18px; }
+    .name { font-size: 1.85rem; }
+    .script { font-size: 1.7rem; }
+    .logo { width: 82px; height: 82px; }
+    .link { font-size: 0.98rem; padding: 16px 18px; }
+  }
+
+  /* ---------- Small phones ---------- */
+  @media (max-width: 400px) {
+    :root { --hero-h: 300px; --pad-top: 40px; }
+    .page { padding-left: 16px; padding-right: 16px; }
+    .name { font-size: 1.6rem; letter-spacing: 0.01em; }
+    .script { font-size: 1.5rem; }
+    .tagline { font-size: 0.72rem; letter-spacing: 0.12em; }
+    .chip { font-size: 0.74rem; padding: 6px 13px; }
+    .logo { width: 74px; height: 74px; }
+    .socials { gap: 16px; }
+    .socials a { width: 42px; height: 42px; }
+    .section { margin-top: 36px; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="hero-bg" aria-hidden="true"></div>
+
+  <main class="page">
+
+    <!-- EDIT #4 — LOGO lockup (the wordmark + tagline live inside the image).
+         Replace logo.png to change it. It hides itself if the file is missing. -->
+    <img class="logo" src="logo.png" alt="Garuddev.bir — The Shot Everyone Asks About" onerror="this.style.display='none'" />
+
+    <!-- ════════════════════════════════════════════════════════════
+         EDIT #6 — SOCIAL ICONS  (set each href)
+    ════════════════════════════════════════════════════════════ -->
+    <nav class="socials" aria-label="Social links">
+      <a href="https://instagram.com/garuddev.bir" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://wa.me/918448322688" aria-label="WhatsApp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm5.4 14.1c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.2-.9-2.7-1.2-4.4-4-4.5-4.2-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 1.8 1.1 2.1 1.3.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.2.5.2.5.4.1.2.1.8-.1 1.3z"/></svg>
+      </a>
+      <a href="tel:+918448322688" aria-label="Call" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.2 2.2z"/></svg>
+      </a>
+    </nav>
+
+    <!-- ════════════════════════════════════════════════════════════
+         EDIT #6 — SERVICES (What We Do)
+         Each button = icon + title. Replace href="#" with the real link
+         later (portfolio, Instagram highlight, WhatsApp, etc.).
+    ════════════════════════════════════════════════════════════ -->
+    <div class="links">
+
+      <a class="link" href="https://drive.google.com/drive/folders/1ak-YjUdAw4Sj-PNbNWlHEMq_ajb1P4xM" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="18" r="2.2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M6.6 7.6 8.6 9.6M17.4 7.6 15.4 9.6M6.6 16.4 8.6 14.4M17.4 16.4 15.4 14.4"/></svg></span>
+        <span>Cinematic Drone Shoots</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="link" href="https://drive.google.com/drive/folders/1u92RCXZLsh85iAPDX1Jgzp8WDf24LDY4" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
+        <span>Professional Photography</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="link" href="https://drive.google.com/drive/folders/102BVsBvMoPHkRvHqACcUK170Bwvsmbyu" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8h20M2 16h20M7 4v16M17 4v16"/></svg></span>
+        <span>Cinematography &amp; Videography</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="link" href="https://drive.google.com/drive/folders/1mO5QxrHJY4tRqpH68GnkZTAlUIsDuoPl" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9.5 20v-5h5v5"/></svg></span>
+        <span>Property Shoots</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="link" href="https://drive.google.com/drive/folders/1nRHrGGbtLGm0sGenVhZSKIGmFlWgY-WQ" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.6c0 4.5-8.8 9.9-8.8 9.9S3.2 13.1 3.2 8.6A4.4 4.4 0 0 1 12 6.4a4.4 4.4 0 0 1 8.8 2.2z"/></svg></span>
+        <span>Pre Wedding &amp; Couple Shoots</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="link" href="https://drive.google.com/drive/folders/1ZX7fHmu_S9gqTC1XZdbsr-WNTvHL9maB" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor" stroke="none"/></svg></span>
+        <span>YouTube Films &amp; Travel Stories</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
+
+    </div>
+
+    <!-- EDIT #8 — ABOUT -->
+    <section class="section">
+      <div class="divider"><span>About Us</span></div>
+      <p>Garuddev.bir is a premium visual storytelling studio in Bir, backed by 9+ years of experience. We help travelers, businesses & brands turn moments into visuals people cherish & remember.</p>
+    </section>
+
+    <!-- EDIT #9 — CONTACT -->
+    <section class="section">
+      <div class="divider"><span>Contact</span></div>
+      <ul class="contact-list">
+        <li><a href="tel:+918448322688">📞 8448322688</a></li>
+        <li><a href="mailto:Garuddev.bir@gmail.com">✉️ Garuddev.bir@gmail.com</a></li>
+        <li><a href="https://instagram.com/garuddev.bir" target="_blank" rel="noopener">📸 @garuddev.bir</a></li>
+        <li>📍 Bir, Himachal Pradesh</li>
+      </ul>
+    </section>
+
+    <footer>Capture · Remember · Cherish</footer>
+  </main>
+</body>
+</html>
