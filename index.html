@@ -35,7 +35,7 @@
     --gold:      #a5813f;  /* small accents & dividers                  */
 
     --maxw: 520px;
-    --hero-h: 400px;   /* height of the fading hero image  */
+    --hero-h: 480px;   /* height of the fading hero image  */
     --pad-top: 120px;   /* logo overlaps the peaks, wordmark lands on beige */
   }
 
@@ -43,7 +43,7 @@
   html { -webkit-text-size-adjust: 100%; }
 
   body {
-    background: var(--bg);
+    background: var(--bg) url('bg.png') top left / auto repeat fixed;
     color: var(--ink);
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     line-height: 1.55;
@@ -64,9 +64,14 @@
         rgba(240,230,221,0.00) 0%,
         rgba(240,230,221,0.05) 20%,
         rgba(165,129,88,0.26) 40%,
-        rgba(240,230,221,0.90) 56%,
-        var(--bg) 63%),
+        rgba(240,230,221,0.85) 56%,
+        rgba(240,230,221,0.85) 100%),
       url('hero.jpg') center 30% / cover no-repeat;
+    /* fade the whole hero layer (photo + tint) to transparent near the
+       bottom so the tiled background pattern shows through gradually
+       instead of appearing abruptly once the hero box ends */
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
   }
 
   .page {
@@ -138,7 +143,7 @@
   /* ---------- Social icon row ---------- */
   .socials { display: flex; gap: 20px; justify-content: center; margin: 22px 0 34px; }
   .socials a {
-    width: 44px; height: 44px;
+    width: 66px; height: 66px;
     display: inline-flex; align-items: center; justify-content: center;
     color: var(--ink);
     background: rgba(255,255,255,0.5);
@@ -147,26 +152,26 @@
     transition: transform 0.15s ease, background 0.15s ease;
   }
   .socials a:hover { transform: translateY(-2px); background: rgba(255,255,255,0.85); }
-  .socials svg { width: 22px; height: 22px; }
+  .socials svg { width: 33px; height: 33px; }
 
   /* ---------- Service buttons (icon + title) ---------- */
   /* Fill = --cta, with a thin brown→gold gradient border */
-  .links { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+  .links { width: 100%; display: flex; flex-direction: column; gap: 22px; margin-bottom: 20px; }
   .link {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 21px;
     text-align: left;
     text-decoration: none;
     font-family: "Oswald", sans-serif;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    font-size: 1rem;
+    font-size: 1.5rem;
     line-height: 1.15;
     color: var(--cta-text);
-    padding: 16px 18px;
-    border-radius: 14px;
+    padding: 24px 27px;
+    border-radius: 18px;
     border: 3px solid transparent;
     background:
       linear-gradient(var(--cta), var(--cta)) padding-box,
@@ -180,12 +185,12 @@
   }
   .link .ic {
     flex: 0 0 auto;
-    width: 26px; height: 26px;
+    width: 39px; height: 39px;
     color: var(--cta-text);
   }
   .link .ic svg { width: 100%; height: 100%; }
   .link span { flex: 1 1 auto; }
-  .link .arrow { flex: 0 0 auto; opacity: 0.6; width: 16px; height: 16px; }
+  .link .arrow { flex: 0 0 auto; opacity: 0.6; width: 24px; height: 24px; }
 
   /* ---------- Section blocks ---------- */
   .section { width: 100%; margin-top: 42px; }
@@ -220,26 +225,33 @@
 
   /* ---------- Tablets & large phones ---------- */
   @media (max-width: 600px) {
-    :root { --hero-h: 350px; --pad-top: 52px; }
+    :root { --hero-h: 420px; --pad-top: 148px; }
     .page { padding-left: 18px; padding-right: 18px; }
     .name { font-size: 1.85rem; }
     .script { font-size: 1.7rem; }
-    .logo { width: 82px; height: 82px; }
-    .link { font-size: 0.98rem; padding: 16px 18px; }
+    .logo { width: 172px; height: 172px; margin-bottom: -18px; }
+    .link { font-size: 1.35rem; padding: 20px 22px; gap: 16px; }
+    .link .ic { width: 32px; height: 32px; }
+    .link .arrow { width: 20px; height: 20px; }
+    .links { gap: 18px; }
+    /* push About/Contact further down so they settle in the lower half */
+    .section:first-of-type { margin-top: 100px; }
   }
 
   /* ---------- Small phones ---------- */
   @media (max-width: 400px) {
-    :root { --hero-h: 300px; --pad-top: 40px; }
+    :root { --hero-h: 360px; --pad-top: 118px; }
     .page { padding-left: 16px; padding-right: 16px; }
     .name { font-size: 1.6rem; letter-spacing: 0.01em; }
     .script { font-size: 1.5rem; }
     .tagline { font-size: 0.72rem; letter-spacing: 0.12em; }
     .chip { font-size: 0.74rem; padding: 6px 13px; }
-    .logo { width: 74px; height: 74px; }
+    .logo { width: 148px; height: 148px; margin-bottom: -14px; }
     .socials { gap: 16px; }
-    .socials a { width: 42px; height: 42px; }
+    .socials a { width: 63px; height: 63px; }
     .section { margin-top: 36px; }
+    /* push About/Contact further down so they settle in the lower half */
+    .section:first-of-type { margin-top: 80px; }
   }
 </style>
 </head>
@@ -273,6 +285,7 @@
          Each button = icon + title. Replace href="#" with the real link
          later (portfolio, Instagram highlight, WhatsApp, etc.).
     ════════════════════════════════════════════════════════════ -->
+    <!--
     <div class="links">
 
       <a class="link" href="https://drive.google.com/drive/folders/1ak-YjUdAw4Sj-PNbNWlHEMq_ajb1P4xM" target="_blank" rel="noopener">
@@ -312,6 +325,7 @@
       </a>
 
     </div>
+    -->
 
     <!-- EDIT #8 — ABOUT -->
     <section class="section">
